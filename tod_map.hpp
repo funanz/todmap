@@ -18,8 +18,8 @@ public:
         fill();
     }
 
-    constexpr int width() { return Width; };
-    constexpr int height() { return Height; };
+    static constexpr int width() { return Width; };
+    static constexpr int height() { return Height; };
 
     void fill() {
         for (int y = 0; y < Height; y++) {
