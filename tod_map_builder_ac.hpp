@@ -21,7 +21,7 @@ private:
         if (floor >= 60) return 255;
 
         auto x = floor - 1;
-        return (x << 1) + (~(x >> 4) & 1);
+        return (x << 1) | (~(x >> 4) & 1);
     }
 
     template <class RNG>
