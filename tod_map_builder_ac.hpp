@@ -15,14 +15,6 @@ public:
         return build(rng);
     }
 
-private:
-    static uint8_t to_seed(int floor) {
-        if (floor < 1) return 255;
-        if (floor >= 60) return 255;
-
-        return floor - 1;
-    }
-
     template <class RNG>
     tod_map_ac build(RNG& rng) {
         tod_map_ac map;
@@ -32,6 +24,14 @@ private:
                 build_wall(map, x, y, rng);
 
         return map;
+    }
+
+private:
+    static uint8_t to_seed(int floor) {
+        if (floor < 1) return 255;
+        if (floor >= 60) return 255;
+
+        return floor - 1;
     }
 
     template <class RNG>

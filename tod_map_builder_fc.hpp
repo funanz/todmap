@@ -24,13 +24,6 @@ public:
         }
     }
 
-private:
-    static std::tuple<uint8_t, uint8_t> to_seed(int floor) {
-        auto x = floor * 3 + 3;
-
-        return { x, x + 2 };
-    }
-
     template <class RNG>
     tod_map_fc build(RNG& rng) {
         tod_map_fc map;
@@ -40,6 +33,13 @@ private:
                 build_wall(map, x, y, rng);
 
         return map;
+    }
+
+private:
+    static std::tuple<uint8_t, uint8_t> to_seed(int floor) {
+        auto x = floor * 3 + 3;
+
+        return { x, x + 2 };
     }
 
     template <class RNG>
