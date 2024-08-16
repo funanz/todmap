@@ -17,12 +17,10 @@ public:
     }
 
     result_type operator ()() {
-        result_type result = x;
-
         auto a = x >> 7;
         auto b = x >> 4;
         x = (x << 1) | (~(a ^ b) & 1);
 
-        return result;
+        return x;
     }
 };
