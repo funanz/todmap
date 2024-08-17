@@ -2,6 +2,8 @@
 
     $ make
     $ ./todmap --ac 1 --fc 1
+    $ ./todmap --ac `seq 1 60`
+    $ ./todmap --fc `seq 1 60`
 
 ## Usage: todmap [--ac | --fc] &lt;floor number&gt;...
 
