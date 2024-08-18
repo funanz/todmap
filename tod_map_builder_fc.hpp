@@ -1,6 +1,7 @@
 #pragma once
 #include <cassert>
 #include <cstdint>
+#include <functional>
 #include <set>
 #include <tuple>
 #include "tod_map.hpp"
@@ -10,7 +11,14 @@ using tod_map_fc = tod_map<15*2+3, 6*2+3>;
 
 class tod_map_builder_fc
 {
+    using progress_fn_t = std::function<void(const tod_map_fc&)>;
+    progress_fn_t progress_fn;
+
 public:
+    tod_map_builder_fc() {
+        progress_fn = [](auto&) {};
+    }
+
     tod_map_fc build(int floor) {
         if (1 <= floor && floor <= 59) {
             auto [s1, s2] = to_seed(floor);
@@ -35,6 +43,10 @@ public:
         return map;
     }
 
+    void progress(progress_fn_t fn) {
+        progress_fn = fn ? fn : [](auto&) {};
+    }
+
 private:
     static std::tuple<uint8_t, uint8_t> to_seed(int floor) {
         auto x = floor * 3 + 3;
@@ -49,6 +61,7 @@ private:
         while (map.get(x, y) == Block::None) {
             map.set(x, y, Block::Piller);
             history.insert({x, y});
+            progress_fn(map);
 
             // Is it closed in history?
             if (history.contains(move(x, y, 0, 2)) &&
@@ -70,6 +83,8 @@ private:
                     continue;
 
                 map.set(wx, wy, Block::Wall);
+                progress_fn(map);
+
                 x = nx;
                 y = ny;
                 break;

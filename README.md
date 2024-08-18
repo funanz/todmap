@@ -2,6 +2,7 @@
 
     $ make
     $ ./todmap --ac 1 --fc 1
+    $ ./todmap --progress --ac 1 --fc 1
     $ ./todmap --ac `seq 1 60`
     $ ./todmap --fc `seq 1 60`
 
@@ -11,4 +12,6 @@
 |---|---|
 |--ac|Generated in the arcade version|
 |--fc|Generated in the FC (NES) version|
+|--progress|Show progress|
+|--no-progress|Don't show progress|
 |&lt;floor number&gt;|Floor number (1-60)|

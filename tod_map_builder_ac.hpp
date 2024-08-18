@@ -1,6 +1,7 @@
 #pragma once
 #include <cassert>
 #include <cstdint>
+#include <functional>
 #include <tuple>
 #include "tod_map.hpp"
 #include "tod_rand_ac.hpp"
@@ -9,7 +10,14 @@ using tod_map_ac = tod_map<17*2+3, 8*2+3>;
 
 class tod_map_builder_ac
 {
+    using progress_fn_t = std::function<void(const tod_map_ac&)>;
+    progress_fn_t progress_fn;
+
 public:
+    tod_map_builder_ac() {
+        progress_fn = [](auto&) {};
+    }
+
     tod_map_ac build(int floor) {
         tod_rand_ac rng(to_seed(floor));
 
@@ -27,6 +35,10 @@ public:
         return map;
     }
 
+    void progress(progress_fn_t fn) {
+        progress_fn = fn ? fn : [](auto&) {};
+    }
+
 private:
     static uint8_t to_seed(int floor) {
         if (floor < 1) return 255;
@@ -39,6 +51,7 @@ private:
     void build_wall(tod_map_ac& map, int x, int y, RNG& rng) {
         while (map.get(x, y) == Block::None) {
             map.set(x, y, Block::Piller);
+            progress_fn(map);
 
             for (;;) {
                 auto direction = rng() % 4;
@@ -48,6 +61,7 @@ private:
                     continue;
 
                 map.set(wx, wy, Block::Wall);
+                progress_fn(map);
 
                 auto [nx, ny] = move(x, y, direction, 2);
                 x = nx;
