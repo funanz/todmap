@@ -1,4 +1,4 @@
-## A sample of the Tower of Druaga map generation algorithm<br>（ドルアーガの塔マップ生成アルゴリズムのサンプル）
+## An example of the map generation algorithm for "The Tower of Druaga"<br>「ドルアーガの塔」マップ生成アルゴリズムの例
 
     $ make
     $ ./todmap --ac 1 --fc 1
