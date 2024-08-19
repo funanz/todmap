@@ -6,12 +6,12 @@
     $ ./todmap --ac `seq 1 60`
     $ ./todmap --fc `seq 1 60`
 
-## Usage: todmap [--ac | --fc] &lt;floor number&gt;...
+## Usage: todmap [options]... &lt;floor number&gt;...
 
 |Option|Description|
 |---|---|
-|--ac|Generated in the arcade version|
-|--fc|Generated in the FC (NES) version|
-|--progress|Show progress|
-|--no-progress|Don't show progress|
+|-a, --ac|Generated in the arcade version|
+|-f, --fc|Generated in the FC (NES) version|
+|-p, --progress|Show progress|
+|-P, --no-progress|Don't show progress|
 |&lt;floor number&gt;|Floor number (1-60)|

@@ -61,13 +61,13 @@ int main(int argc, char** argv)
 
     for (int i = 1; i < argc; i++) {
         std::string arg = argv[i];
-        if (arg == "--ac")
+        if (arg == "--ac" || arg == "-a")
             mode = "AC";
-        else if (arg == "--fc")
+        else if (arg == "--fc" || arg == "-f")
             mode = "FC";
-        else if (arg == "--progress")
+        else if (arg == "--progress" || arg == "-p")
             progress = true;
-        else if (arg == "--no-progress")
+        else if (arg == "--no-progress" || arg == "-P")
             progress = false;
         else if (is_number(arg))
             print_map(mode, std::stoi(arg), progress);
