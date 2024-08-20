@@ -1,0 +1,10 @@
+[*]
+tab_width = 8
+indent_size = 8
+indent_style = space
+
+[*.{c,h,cpp,hpp,cc,hh,cxx,hxx,ixx}]
+indent_size = 4
+
+[Makefile]
+indent_style = tab
