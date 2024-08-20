@@ -79,9 +79,6 @@ private:
                     continue;
 
                 auto [wx, wy] = move(x, y, direction, 1);
-                if (map.get(wx, wy) != Block::None)
-                    continue;
-
                 map.set(wx, wy, Block::Wall);
                 progress_fn(map);
 
