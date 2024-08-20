@@ -53,21 +53,18 @@ private:
             map.set(x, y, Block::Piller);
             progress_fn(map);
 
-            for (;;) {
-                auto direction = rng() % 4;
+            auto direction = rng() % 4;
+            auto [wx, wy] = move(x, y, direction, 1);
 
-                auto [wx, wy] = move(x, y, direction, 1);
-                if (map.get(wx, wy) != Block::None)
-                    continue;
-
-                map.set(wx, wy, Block::Wall);
-                progress_fn(map);
-
-                auto [nx, ny] = move(x, y, direction, 2);
-                x = nx;
-                y = ny;
-                break;
+            while (map.get(wx, wy) != Block::None) {
+                direction = rng() % 4;
+                std::tie(wx, wy) = move(x, y, direction, 1);
             }
+
+            map.set(wx, wy, Block::Wall);
+            progress_fn(map);
+
+            std::tie(x, y) = move(x, y, direction, 2);
         }
     }
 

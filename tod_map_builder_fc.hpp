@@ -71,21 +71,20 @@ private:
                 break;
             }
 
-            for (;;) {
-                auto direction = rng() % 4;
+            auto direction = rng() % 4;
+            auto [nx, ny] = move(x, y, direction, 2);
 
-                auto [nx, ny] = move(x, y, direction, 2);
-                if (history.contains({nx, ny}))
-                    continue;
-
-                auto [wx, wy] = move(x, y, direction, 1);
-                map.set(wx, wy, Block::Wall);
-                progress_fn(map);
-
-                x = nx;
-                y = ny;
-                break;
+            while (history.contains({nx, ny})) {
+                direction = rng() % 4;
+                std::tie(nx, ny) = move(x, y, direction, 2);
             }
+
+            auto [wx, wy] = move(x, y, direction, 1);
+            map.set(wx, wy, Block::Wall);
+            progress_fn(map);
+
+            x = nx;
+            y = ny;
         }
     }
 
