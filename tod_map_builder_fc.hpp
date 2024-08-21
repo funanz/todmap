@@ -1,8 +1,8 @@
 #pragma once
-#include <cassert>
 #include <cstdint>
 #include <functional>
 #include <set>
+#include <stdexcept>
 #include <tuple>
 #include "tod_map.hpp"
 #include "tod_rand_fc.hpp"
@@ -95,6 +95,6 @@ private:
         case 2: return { x - length, y };
         case 3: return { x + length, y };
         }
-        assert(0);
+        throw std::invalid_argument("invalid direction");
     }
 };

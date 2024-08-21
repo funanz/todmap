@@ -1,7 +1,7 @@
 #pragma once
-#include <cassert>
 #include <cstdint>
 #include <functional>
+#include <stdexcept>
 #include <tuple>
 #include "tod_map.hpp"
 #include "tod_rand_ac.hpp"
@@ -75,6 +75,6 @@ private:
         case 2: return { x, y + length };
         case 3: return { x - length, y };
         }
-        assert(0);
+        throw std::invalid_argument("invalid direction");
     }
 };
