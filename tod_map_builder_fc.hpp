@@ -50,8 +50,9 @@ public:
 private:
     static std::tuple<uint8_t, uint8_t> to_seed(int floor) {
         auto x = floor * 3 + 3;
+        auto y = floor * 3 + 5;
 
-        return { x, x + 2 };
+        return { x, y };
     }
 
     template <class RNG>
