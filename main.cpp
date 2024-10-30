@@ -13,9 +13,7 @@ static const std::map<std::string, std::string> char_map = {
 };
 
 template <class T>
-concept MapBuilder = requires (T& mb) { mb.build(1); };
-
-template <MapBuilder T>
+requires (requires (T& mb) { mb.build(1); })
 static void print_map(T& mb, int floor, bool progress)
 {
     if (progress) {
